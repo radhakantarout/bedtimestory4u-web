@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import BottomNav from "@/components/BottomNav";
 import useAuth from "@/hooks/useAuth";
 import { apiGet } from "@/lib/api";
 
@@ -50,6 +51,7 @@ export default function VoicesPage() {
           </Link>
         </div>
       </div>
+        <BottomNav />
     </div>
   );
 }
