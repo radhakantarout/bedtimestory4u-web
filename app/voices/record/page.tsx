@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState, useRef } from "react";
+import { Suspense, useState, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import useAuth from "@/hooks/useAuth";
@@ -21,17 +21,28 @@ function RecordVoiceContent() {
 
   const startRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const mediaRecorder = new MediaRecorder(stream);
+
+    // Mobile‑safe MIME type
+    const options = { mimeType: "audio/mp4" };
+    const mediaRecorder = new MediaRecorder(stream, options);
 
     mediaRecorderRef.current = mediaRecorder;
     chunksRef.current = [];
 
     mediaRecorder.ondataavailable = (e: any) => {
-      chunksRef.current.push(e.data);
+      if (e.data && e.data.size > 0) {
+        chunksRef.current.push(e.data);
+      }
     };
 
     mediaRecorder.onstop = async () => {
-      const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+      const blob = new Blob(chunksRef.current, { type: "audio/mp4" });
+
+      if (blob.size === 0) {
+        alert("Recording failed — please try again.");
+        return;
+      }
+
       const url = URL.createObjectURL(blob);
       setAudioURL(url);
 
@@ -48,23 +59,31 @@ function RecordVoiceContent() {
   };
 
   const stopRecording = () => {
-    mediaRecorderRef.current.stop();
+    const recorder = mediaRecorderRef.current;
+    if (recorder && recorder.state !== "inactive") {
+      recorder.stop();
+    }
     setRecording(false);
   };
 
   const saveVoice = async () => {
     if (!user?.email || !audioBase64) return;
 
-    await apiPost("/save-voice", {
-      userId: user.email,
-      voiceName,
-      audioBase64
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/save-voice`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store", // prevents 304 on mobile
+      body: JSON.stringify({
+        userId: user.email,
+        voiceName,
+        audioBase64
+      })
     });
 
     router.push("/voices");
   };
 
-  if (loading) return <p className="p-6">Loading...</p>;
+  if (loading) return <p className="p-6 text-white">Loading...</p>;
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -73,9 +92,7 @@ function RecordVoiceContent() {
       <div className="p-6 max-w-md mx-auto">
         <h1 className="text-2xl font-bold mb-4">Record {voiceName}</h1>
 
-        <p className="text-gray-300 mb-4">
-          Read this aloud for 10–20 seconds:
-        </p>
+        <p className="text-gray-300 mb-4">Read this aloud for 10–20 seconds:</p>
 
         <div className="bg-gray-900 p-4 rounded mb-6 text-gray-300">
           “Hi sweetheart, this is your bedtime voice. I love telling you stories.
