@@ -2,6 +2,7 @@
 
 import useAuth from "@/hooks/useAuth";
 import Navbar from "@/components/Navbar";
+import BottomNav from "@/components/BottomNav";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -52,6 +53,7 @@ export default function DashboardPage() {
           🎥 Video Avatar (Coming Soon)
         </Link>
       </div>
+      <BottomNav /> 
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { Suspense, useState, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
+import BottomNav from "@/components/BottomNav";
 import useAuth from "@/hooks/useAuth";
 import { apiPost } from "@/lib/api";
 
@@ -138,6 +139,7 @@ function RecordVoiceContent() {
           </div>
         )}
       </div>
+        <BottomNav />   
     </div>
   );
 }

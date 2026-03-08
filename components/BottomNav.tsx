@@ -33,6 +33,10 @@ export default function BottomNav() {
         <span>📚</span>
         <span>Stories</span>
       </Link>
+      <Link href="/voices" className={linkClass("/voices")}>
+        <span>🎤</span>
+        <span>Clone Voice</span>
+    </Link>
 
       <Link href="/profile" className={linkClass("/profile")}>
         <span>👤</span>
