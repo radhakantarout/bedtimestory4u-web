@@ -39,7 +39,7 @@ export default function DashboardPage() {
         </Link>
 
         <Link
-          href="/history"
+          href="/my-stories"
           className="block bg-green-600 p-4 rounded-lg text-center font-semibold"
         >
           🎧 My Stories
