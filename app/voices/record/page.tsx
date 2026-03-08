@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { Suspense, useEffect, useState, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import useAuth from "@/hooks/useAuth";
 import { apiPost } from "@/lib/api";
 
-export default function RecordVoicePage() {
+function RecordVoiceContent() {
   const params = useSearchParams();
   const router = useRouter();
   const { user, loading } = useAuth();
@@ -122,5 +122,13 @@ export default function RecordVoicePage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function RecordVoicePage() {
+  return (
+    <Suspense fallback={<p className="p-6 text-white">Loading...</p>}>
+      <RecordVoiceContent />
+    </Suspense>
   );
 }
