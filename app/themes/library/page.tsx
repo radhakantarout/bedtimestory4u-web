@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
+import BottomNav from "@/components/BottomNav";
 import ThemeCard from "@/components/ThemeCard";
 import useAuth from "@/hooks/useAuth";
 import { apiGet } from "@/lib/api";
@@ -47,6 +48,7 @@ export default function ThemesLibraryPage() {
           ))}
         </div>
       </div>
+      <BottomNav />
     </div>
   );
 }

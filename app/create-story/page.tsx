@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
+import BottomNav from "@/components/BottomNav";
 import { apiGet, apiPost } from "@/lib/api";
 import useAuth from "@/hooks/useAuth";
 
@@ -145,6 +146,7 @@ export default function CreateStoryPage() {
           {submitting ? "Creating your story..." : "Generate Story"}
         </button>
       </div>
+      <BottomNav />
     </div>
   );
 }
