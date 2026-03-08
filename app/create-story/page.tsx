@@ -50,7 +50,7 @@ export default function CreateStoryPage() {
         userId: user.email,
         prompt: form.prompt,
         themeId: form.themeId,
-        voiceID: form.voiceID,
+        voiceId: form.voiceID,
         childAge: Number(form.childAge),
         childName: form.childName
       });

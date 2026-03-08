@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
+import BottomNav from "@/components/BottomNav";
 import useAuth from "@/hooks/useAuth";
 import { apiGet } from "@/lib/api";
 import Link from "next/link";
@@ -37,6 +38,8 @@ export default function MyStoriesPage() {
           </Link>
         ))}
       </div>
+    <BottomNav />
     </div>
+    
   );
 }
