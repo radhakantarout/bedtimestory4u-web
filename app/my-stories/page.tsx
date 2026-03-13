@@ -32,7 +32,7 @@ export default function MyStoriesPage() {
             href={`/story/${story.storyId}`}
             className="block bg-gray-900 p-4 rounded mb-3"
           >
-            <p className="font-semibold">{story.prompt}</p>
+            <p className="font-semibold">{story.title}</p>
             <p className="text-sm text-gray-400">{story.themeId}</p>
             <p className="text-sm text-gray-500">{story.status}</p>
           </Link>

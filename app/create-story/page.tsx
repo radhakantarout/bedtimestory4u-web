@@ -16,9 +16,10 @@ export default function CreateStoryPage() {
   const [form, setForm] = useState({
     themeId: "",
     voiceID: "",
-    childName: "",
+    language: "",
     childAge: "",
-    prompt: ""
+    prompt: "",
+    storyTime: ""
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -51,9 +52,10 @@ export default function CreateStoryPage() {
         userId: user.email,
         prompt: form.prompt,
         themeId: form.themeId,
-        voiceId: form.voiceID,
+        voiceID: form.voiceID,
         childAge: Number(form.childAge),
-        childName: form.childName
+        language: form.language,
+        story_time: form.storyTime
       });
 
       router.push("/my-stories");
@@ -109,15 +111,23 @@ export default function CreateStoryPage() {
           ))}
         </select>
 
-        {/* Child Name */}
+        {/* Language */}
         <input
-          name="childName"
-          placeholder="Child's Name"
-          value={form.childName}
+          name="language"
+          placeholder="Language (English, Odia, Hindi etc)"
+          value={form.language}
           onChange={handleChange}
           className="w-full p-3 rounded bg-gray-900 mb-4"
         />
 
+        {/* Story Time */}
+        <input
+          name="storyTime"
+          placeholder="Story Time (in minutes)"
+          value={form.storyTime}
+          onChange={handleChange}
+          className="w-full p-3 rounded bg-gray-900 mb-4"
+        />
         {/* Child Age */}
         <input
           name="childAge"
@@ -134,7 +144,7 @@ export default function CreateStoryPage() {
           placeholder="Story prompt (optional)"
           value={form.prompt}
           onChange={handleChange}
-          className="w-full p-3 rounded bg-gray-900 mb-4 h-32"
+          className="w-full p-3 rounded bg-gray-900 mb-4"
         />
 
         {/* Submit */}
