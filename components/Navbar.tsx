@@ -65,7 +65,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/themes"
+            href="/themes/library"
             className="block px-3 py-2 text-gray-200 hover:bg-gray-800 rounded"
           >
             🎨 Themes
