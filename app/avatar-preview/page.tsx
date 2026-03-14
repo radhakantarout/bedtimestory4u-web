@@ -1,8 +1,9 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function AvatarPreview() {
+function AvatarPreviewContent() {
   const params = useSearchParams();
   const url = params.get("url");
 
@@ -25,6 +26,7 @@ export default function AvatarPreview() {
       {/* Foreground content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full p-6 text-center">
         <h1 className="text-3xl font-bold mb-4">Your Avatar is Ready</h1>
+
         <p className="text-gray-300 max-w-md">
           This avatar will appear in the background while your bedtime stories play.
         </p>
@@ -37,5 +39,13 @@ export default function AvatarPreview() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function AvatarPreview() {
+  return (
+    <Suspense fallback={<div className="text-white p-10">Loading avatar...</div>}>
+      <AvatarPreviewContent />
+    </Suspense>
   );
 }
