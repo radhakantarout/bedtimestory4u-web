@@ -48,14 +48,15 @@ export default function ThemePage() {
         )}
 
         {stories.map((story) => (
-          <StoryListItem
-            key={story.storyId}
-            title={story.title}
-            audioUrl={story.audioUrl}
-            rating={story.rating}
-            isPremium={story.isPremium}
-          />
-        ))}
+  <StoryListItem
+    key={story.storyId}
+    storyId={story.storyId}
+    themeId={themeId}
+    title={story.title}
+    rating={story.rating}
+    isPremium={story.isPremium}
+  />
+))}
       </div>
     </div>
   );

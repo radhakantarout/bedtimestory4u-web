@@ -2,8 +2,10 @@
 
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function AvatarPreviewContent() {
+    const router = useRouter();
   const params = useSearchParams();
   const url = params.get("url");
 
@@ -32,11 +34,11 @@ function AvatarPreviewContent() {
         </p>
 
         <button
-          onClick={() => window.history.back()}
-          className="mt-8 bg-purple-600 px-6 py-3 rounded-lg font-semibold"
-        >
-          Go Back
-        </button>
+  onClick={() => router.push("/dashboard")}
+  className="mt-8 bg-purple-600 px-6 py-3 rounded-lg font-semibold"
+>
+  Go to Home
+</button>
       </div>
     </div>
   );
